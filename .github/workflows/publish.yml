@@ -2,144 +2,123 @@ name: CI/CD Pipeline
 
 on:
   workflow_dispatch:
-  
+
 jobs:
-  Development:
-    runs-on: ubuntu-latest
-    environment:
-      name: "Development"
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    permissions:
-      id-token: write #This is required for requesting the JWT
-    steps:
-      - name: Wait for approval
-        uses: hmarr/auto-approve-action@v2.0.0
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+  # Development:
+  #   runs-on: ubuntu-latest
+  #   environment:
+  #     name: "Development"
+  #     url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+  #   permissions:
+  #     id-token: write #This is required for requesting the JWT
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
 
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.inputs.branch }}
+  #     - name: Set up .NET Core
+  #       uses: actions/setup-dotnet@v3
+  #       with:
+  #         dotnet-version: "8.0.x"
 
-      - name: Set up .NET Core
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: "8.0.x"
+  #     - name: Restore dependencies
+  #       run: dotnet restore ./kuba-back/Kuba.Api/Kuba.Api.sln
 
-      - name: Restore dependencies
-        run: dotnet restore ./kuba-back/Kuba.Api/Kuba.Api.sln
+  #     - name: Build
+  #       run: dotnet build  ./kuba-back/Kuba.Api/Kuba.Api.sln --configuration Release --no-restore
 
-      - name: Build
-        run: dotnet build  ./kuba-back/Kuba.Api/Kuba.Api.sln --configuration Release --no-restore
+  #     - name: Publish
+  #       run: dotnet publish ./kuba-back/Kuba.Api/Kuba.Api.sln -c Release -o ${{env.DOTNET_ROOT}}/myapp --no-build
 
-      - name: Publish
-        run: dotnet publish ./kuba-back/Kuba.Api/Kuba.Api.sln -c Release -o ${{env.DOTNET_ROOT}}/myapp --no-build
+  #     - name: Upload artifact for deployment job
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: .net-app
+  #         path: ${{env.DOTNET_ROOT}}/myapp
 
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
-        with:
-          name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+  #     - name: Download artifact from build job
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: .net-app
 
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v3
-        with:
-          name: .net-app
+  #     - name: Login to Azure
+  #       uses: azure/login@v1
+  #       with:
+  #         client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_3217A1484F454431A09FE02100929039 }}
+  #         tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_D3DBB2E363F94A8B96A98D42A6ED8B59 }}
+  #         subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_E9546F7F95BD48EC8A4A6A7109EE08A9 }}
 
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_3217A1484F454431A09FE02100929039 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_D3DBB2E363F94A8B96A98D42A6ED8B59 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_E9546F7F95BD48EC8A4A6A7109EE08A9 }}
+  #     - name: Deploy to Azure Web App
+  #       id: deploy-to-webapp
+  #       uses: azure/webapps-deploy@v2
+  #       with:
+  #         app-name: "api-test-leo-dotnetv8"
+  #         slot-name: "Production"
+  #         package: .
 
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: "api-test-leo-dotnetv8"
-          slot-name: "Production"
-          package: .
+  # Staging:
+  #   runs-on: ubuntu-latest
+  #   needs: Development
+  #   environment:
+  #     name: "Staging"
+  #     url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+  #   permissions:
+  #     id-token: write #This is required for requesting the JWT
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
 
-  Staging:
-    runs-on: ubuntu-latest
-    needs: Development
-    environment:
-      name: "Staging"
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    permissions:
-      id-token: write #This is required for requesting the JWT
-    steps:
-      - name: Wait for approval
-        uses: hmarr/auto-approve-action@v2.0.0
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+  #     - name: Set up .NET Core
+  #       uses: actions/setup-dotnet@v3
+  #       with:
+  #         dotnet-version: "8.0.x"
 
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.inputs.branch }}
+  #     - name: Restore dependencies
+  #       run: dotnet restore ./kuba-back/Kuba.Api/Kuba.Api.sln
 
-      - name: Set up .NET Core
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: "8.0.x"
+  #     - name: Build
+  #       run: dotnet build ./kuba-back/Kuba.Api/Kuba.Api.sln --configuration Release --no-restore
 
-      - name: Restore dependencies
-        run: dotnet restore ./kuba-back/Kuba.Api/Kuba.Api.sln
+  #     - name: Publish
+  #       run: dotnet publish ./kuba-back/Kuba.Api/Kuba.Api.sln -c Release -o ${{env.DOTNET_ROOT}}/myapp --no-build
 
-      - name: Build
-        run: dotnet build ./kuba-back/Kuba.Api/Kuba.Api.sln --configuration Release --no-restore
+  #     - name: Upload artifact for deployment job
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: .net-app
+  #         path: ${{env.DOTNET_ROOT}}/myapp
 
-      - name: Publish
-        run: dotnet publish ./kuba-back/Kuba.Api/Kuba.Api.sln -c Release -o ${{env.DOTNET_ROOT}}/myapp --no-build
+  #     - name: Download artifact from build job
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: .net-app
 
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
-        with:
-          name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+  #     - name: Login to Azure
+  #       uses: azure/login@v1
+  #       with:
+  #         client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_3217A1484F454431A09FE02100929039 }}
+  #         tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_D3DBB2E363F94A8B96A98D42A6ED8B59 }}
+  #         subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_E9546F7F95BD48EC8A4A6A7109EE08A9 }}
 
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v3
-        with:
-          name: .net-app
-
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_3217A1484F454431A09FE02100929039 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_D3DBB2E363F94A8B96A98D42A6ED8B59 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_E9546F7F95BD48EC8A4A6A7109EE08A9 }}
-
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: "api-test-leo-dotnetv8"
-          slot-name: "Production"
-          package: .
+  #     - name: Deploy to Azure Web App
+  #       id: deploy-to-webapp
+  #       uses: azure/webapps-deploy@v2
+  #       with:
+  #         app-name: "api-test-leo-dotnetv8"
+  #         slot-name: "Production"
+  #         package: .
 
   Production:
     runs-on: ubuntu-latest
-    needs: Staging
+    # needs: Staging
     environment:
       name: "Production"
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
       id-token: write #This is required for requesting the JWT
-    if: github.event.inputs.branch == 'main'
+    # if: github.event.inputs.branch == 'main'
     steps:
-      - name: Wait for approval
-        uses: hmarr/auto-approve-action@v2.0.0
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.inputs.branch }}
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v3
