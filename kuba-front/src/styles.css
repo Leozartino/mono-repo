@@ -1,0 +1,57 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+* {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+html {
+    .mdc-list-item__primary-text {
+        color: white;
+    }
+    --mat-select-panel-background-color: #9b59b6;
+}
+
+
+
+:root {
+    font-size: 62.5%;
+    --color-purple: #7c3aed;
+    --color-gray-50: #f8fafc;
+    --color-gray-100: #f1f5f9;
+    --color-gray-200: #e2e8f0;
+    --color-gray-300: #cbd5e1;
+    --color-gray-400: #94a3b8;
+    --color-gray-500: #64748b;
+    --color-gray-600: #475569;
+    --color-gray-700: #334155;
+    --color-gray-800: #1e293b;
+    --color-gray-900: #0f172a;
+  }
+
+body { 
+    font-size: 1.6rem;
+}
+
+.flex {
+    display: flex;
+}
+
+.red {
+    color: rgb(227,94,107);
+}
+
+.purple-kuba {
+    color: #9c27b0;
+}
+
+.v-middle {
+    vertical-align: middle;
+}
+

@@ -1,0 +1,64 @@
+<div id="pageLogin" class="flex">
+  <div>
+    <header>
+      <img src="assets/kuba-logo.png" alt="kuba-icon">
+    </header>
+    <main>
+
+      <div class="headline">
+        <h1>Kuba IC</h1> 
+        <img class="headline-img" src="assets/check-icon.png" alt="check">
+        <p class="headline-text">Your one-stop for HSE & Internal Control</p>
+      </div>
+
+      <form [formGroup]= "loginForm" (ngSubmit)="onSubmit()" >
+
+        <div class="input-wrapper">
+          <label for="email">Email</label>
+          <input id="email" type="email" formControlName="email" placeholder="Type your email" required
+                 [ngClass]="{ 'is-invalid': loginForm.get('email')?.invalid && isEmailTouched}"
+                 (ngModelChange)="onInputChange('email')"
+                 >
+
+          <div *ngIf="loginForm.get('email')?.invalid && isEmailTouched">
+          <div class="error-message">
+            Email is required.
+          </div>
+        </div>  
+
+        </div>
+        
+        <div class="input-wrapper">
+          <div class="label-wrapper flex">
+            <label for="password">Password</label>
+            <a class="forgot" href=""> Forgot your password?</a>
+          </div>
+        
+          <input id="password" [type]="showPassword ? 'text' : 'password'" placeholder="Type your password"
+                 formControlName="password" [ngClass]="{ 'is-invalid': loginForm.get('password')?.invalid && isPasswordTouched}"
+                 (ngModelChange)="onInputChange('password')">
+          <div *ngIf="loginForm.get('password')?.invalid && isPasswordTouched">
+            <div class="error-message">
+              Password is required.
+            </div>
+          </div>       
+        
+          <img [src]="showPassword ? 'assets/eye.svg' : 'assets/eye-off.svg'" alt="toggle password visibility"
+               class="eye" (click)="toggleEyePassword()">
+        </div>
+
+        <button [disabled]="loginForm.invalid" type="submit">Login</button>
+      </form>
+    </main>
+  </div>
+  <img class="people-icon" src="/assets/team-kuba.svg" alt="login-side">
+</div>
+
+
+
+<!-- <div class="kuba-loader">
+  <span>
+    <span></span>
+    <span></span>
+  </span>
+</div> -->

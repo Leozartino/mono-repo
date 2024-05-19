@@ -1,0 +1,38 @@
+<div class="mat-elevation-z5">
+    <table mat-table [dataSource]="incidents">
+      <!-- Title Column -->
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef >Title</th>
+        <td mat-cell *matCellDef="let row">{{row.title}}</td>
+      </ng-container>
+  
+      <!-- IncidentType Column -->
+      <ng-container matColumnDef="incidentType">
+        <th mat-header-cell *matHeaderCellDef >Type</th>
+        <td mat-cell *matCellDef="let row">{{ getIncidentTypeName(row.incidentType) }}</td>
+      </ng-container>
+
+    <!-- SeverityType Column -->
+     <ng-container matColumnDef="severityType">
+        <th mat-header-cell *matHeaderCellDef >Severity</th>
+        <td mat-cell *matCellDef="let row">{{ getSeverityTypeName(row.severityType) }}</td>
+     </ng-container>
+
+        <!-- Action Column -->
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef>Action</th>
+            <td mat-cell *matCellDef="let row">
+              <ng-container *ngFor="let action of availableActions">
+                <a [routerLink]="getRouterLink(row.id, action)"  [ngClass]="action" >
+                  <i class="material-icons">{{ action }}</i>
+                </a>
+              </ng-container>
+            </td>
+          </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+  </div>
+  

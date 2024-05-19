@@ -1,0 +1,6 @@
+@Kuba.Api_HostAddress = http://localhost:5007
+
+GET {{Kuba.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,49 @@
+<mat-card>
+    <mat-card-title>New Incident</mat-card-title>
+    <form [formGroup]="incidentUpdateForm" (ngSubmit)="onSubmitUpdateIncident()">
+      <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" id="titleInput" />
+        <mat-error *ngIf="incidentUpdateForm.get('title')?.hasError('required')">
+          Title is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Incident Type</mat-label>
+        <mat-select formControlName="incidentType">
+          @for (incidentTypeSelect of incidentTypesSelect; track incidentTypeSelect) {
+            <mat-option [value]="incidentTypeSelect.value">{{incidentTypeSelect.viewValue}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Severity</mat-label>
+        <mat-select formControlName="severityType">
+          @for (severitySelect of severitiesSelect; track severitySelect) {
+            <mat-option [value]="severitySelect.value">{{severitySelect.viewValue}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Choose a date</mat-label>
+        <input matInput formControlName="reportedDate" required [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" placeholder="Description of the incident"></textarea>
+      </mat-form-field>
+  
+      <button mat-raised-button [disabled]="incidentUpdateForm.invalid" type="submit" color="primary">
+        Update
+      </button>
+  
+    </form>
+  </mat-card>

@@ -1,0 +1,39 @@
+<mat-card>
+    <mat-card-title>Delete Incident</mat-card-title>
+    <form>
+      <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input matInput [value]="incident.title" id="titleInput" disabled/>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Incident Type</mat-label>
+        <input matInput [value]="getIncidentTypeName(incident.incidentType)" disabled id="incidentType" />
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <mat-label>Severity Type</mat-label>
+        <input matInput [value]="getSeverityTypeName(incident.severityType)" disabled id="severityType">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Reported Date</mat-label>
+        <input  matInput [value]="incident.reportedDate" disabled [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea matInput [value]="incident.description" placeholder="{{ incident.description }}" disabled></textarea>
+      </mat-form-field>
+    </form>
+
+    <button mat-raised-button (click)="onDeleteIncident()" style="color: white; background-color: red;">
+      Delete 
+    </button>
+
+  </mat-card>

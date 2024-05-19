@@ -1,0 +1,46 @@
+
+<kuba-app-header></kuba-app-header>
+
+<mat-sidenav-container class="container">
+    
+    <mat-sidenav class="sidenav" mode="side" opened="true"
+    fixedInViewport="true" fixedTopGap="65">
+        <mat-nav-list class="nav-list">
+            <a mat-list-item [routerLink]="['home']"> 
+                <i class="material-icons">
+                    home
+                </i>
+                Home
+            </a>
+
+            <a mat-list-item [routerLink]="['incident']">
+                <i class="material-icons">
+                    summarize
+                </i>
+                Incident
+            </a>
+
+            <a mat-list-item [routerLink]="['incident-read']">
+                <i class="material-icons">
+                    view_list
+                </i>
+                View Incidents
+            </a>
+
+            <a mat-list-item [routerLink]="['establishment']">
+                <i class="material-icons">
+                    restaurant
+                </i>
+                Establishments
+            </a>
+
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="content">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+    
+</mat-sidenav-container>
+
+<kuba-app-footer></kuba-app-footer>

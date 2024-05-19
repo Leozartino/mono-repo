@@ -1,0 +1,261 @@
+
+#pageLogin {
+    height: 100vh;
+}
+
+#pageLogin > * {
+    width: 50%;
+}
+
+img {
+    width: 50%;
+}
+
+ button {
+    all: unset;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-purple);
+}
+
+header img {
+    width: 19.7rem;
+    height: 5.6rem;
+}
+
+#pageLogin > div {
+    padding: 4rem 11.2rem;
+}
+
+main {
+    margin-top: 11.4rem;
+    max-width: 44.4rem;
+    box-shadow: 0 0.4rem 4rem #0003;
+    padding: 2.5rem;
+    border-radius: 10px;
+}
+
+.headline {
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+  }
+  
+.headline h1 {
+margin-bottom: 1.0rem; 
+font-size: 3.6rem;
+line-height: 5.5rem;
+color: var(--color-gray-800);
+}
+  
+.headline img {
+margin-bottom: 0.9rem; 
+}
+
+.headline-text {
+    color: var(--color-gray-600);
+    margin-top: 1.6rem;
+}
+
+.headline-img {
+    width: 4.8rem;
+    height: 4.8rem;
+}
+
+form {
+    margin-top: 4rem;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.is-invalid {
+    border-color: red !important;
+  }
+
+  .error-message {
+    color: red;
+    font-size: smaller;
+    margin-top: 2px;
+  }
+
+
+label {
+    font-weight: 600;
+    font-size: 1.4rem;
+    line-height: 2.1rem;
+    color: var(--color-gray-800);
+}
+
+.forgot {
+    font-weight: 600;
+    font-size: 1.4rem;
+    line-height: 2.1rem;
+}
+
+input::placeholder {
+    font-size: 1.4rem;
+    line-height: 2.1rem;
+    color: var(--color-gray-400);
+}
+
+input {
+    width: 100%;
+    background: white;
+    border: 0.1rem solid var(--color-gray-300);
+    border-radius: 0.4rem;
+
+    padding: 1.6rem 1.2rem;
+
+    margin-top: 0.8rem;
+}
+
+input:focus,
+input:hover {
+    border: 0.1rem solid var(--color-purple);
+    outline: 0;
+}
+
+input:disabled {
+    opacity: 0.35;
+}
+
+
+
+form .input-wrapper + .input-wrapper {
+    margin-top: 1.6rem;
+}
+
+.label-wrapper {
+    justify-content: space-between;
+}
+
+::-ms-reveal {
+    display: none;
+}
+
+.eye {
+    width: 2rem;
+    height: 2rem;
+
+    position: absolute;
+    top: 54%;
+    right: 4%;
+    cursor: pointer;
+}
+
+form button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.6rem 2.4rem;
+
+    background: var(--color-purple);
+    border-radius: 0.4rem;
+    
+    width: 100%;
+    
+    font-weight: bold;
+    color: white;
+
+    margin-block: 3.2rem;
+}
+
+form button:focus {
+    outline: 0.2rem solid black;
+    border-radius: 0.2rem;
+
+}
+
+form button:hover {
+    background: #9f67ff;
+}
+
+
+
+@media (max-width: 1101px){
+
+    #pageLogin > * {
+        width: 100%;
+    }
+
+    .people-icon {
+        display: none;
+    }
+
+    #pageLogin > div {
+        padding: 11rem;
+    }
+
+    main {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    #pageLogin > div {
+        padding: 1rem;
+    }
+}
+
+
+/* @media(min-width: 1600px) {
+    main {
+        margin-top: 26.4rem;
+    }
+} */
+
+/* .kuba-loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    z-index: 10001;
+}
+
+.kuba-loader>span {
+    width: 100px;
+    height: 100px;
+    display: block;
+    border-radius: 5px;
+    overflow: hidden;
+    background: radial-gradient(ellipse at top left, #f1b434 0%, #91268f 50%, #f1b434 99%);
+    background-size: 300% 300%;
+    animation: gradient-loader 2s ease infinite;
+}
+
+.kuba-loader>span>span:first-child {
+    top: 20px;
+}
+
+.kuba-loader>span>span:last-child {
+    top: 60px;
+}
+
+.kuba-loader>span>span {
+    width: 60px;
+    height: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+@keyframes gradient-loader {
+    0% {
+      background-position: 0 0;
+    }
+    50% {
+      background-position: 100% 0;
+    }
+    100% {
+      background-position: 0 0;
+    }
+  } */
