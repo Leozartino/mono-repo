@@ -115,7 +115,7 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
       id-token: write #This is required for requesting the JWT
-    if: github.event.inputs.branch == 'main'
+    # if: github.event.inputs.branch == 'main'
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
