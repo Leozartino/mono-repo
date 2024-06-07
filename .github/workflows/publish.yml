@@ -148,14 +148,14 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_3217A1484F454431A09FE02100929039 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_D3DBB2E363F94A8B96A98D42A6ED8B59 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_E9546F7F95BD48EC8A4A6A7109EE08A9 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_7454B1CEA3494891BCD1DC855CC9C2D9 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_3A42DE0F761F4B8AB810854105ADA747 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_84DD815E94CC4C2DBB9F3D2A96091404 }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: "api-test-leo-dotnetv8"
+          app-name: "api-leo"
           slot-name: "Production"
           package: .
